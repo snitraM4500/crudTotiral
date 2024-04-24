@@ -28,13 +28,23 @@ export interface Options {
 }
 
 export interface Product {
-  name: string;
-  price: number;
-  rating: number;
-  image: string;
+  name:string,
+  description:string,
 }
 export interface Products {
   items: Product[];
+  total: number;
+  page: number;
+  perPage: number;
+  totalPages: number;
+}
+
+export interface Category {
+  name:string,
+  description:string,
+}
+export interface Categories {
+  items: Category[];
   total: number;
   page: number;
   perPage: number;
