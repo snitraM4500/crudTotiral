@@ -15,4 +15,17 @@ export class CategoryService {
   ): Observable<Categories> => {
     return this.apiService.get(url, { params, responseType: 'json' });
   };
+
+  addCategory = (url: string, body: any): Observable<Categories> => {
+    return this.apiService.post(url, body, {});
+  }
+
+  editCategory = (url: string, body: any): Observable<Categories> => {
+    return this.apiService.put(url, body, {});
+  }
+
+  deleteCategory = (url: string): Observable<Categories> => {
+    return this.apiService.delete(url, {});
+  }
+
 }
