@@ -30,23 +30,59 @@ export class HomeComponent {
         page,
         perPage,
       })
-      .subscribe((categories: Categories) => {
-        this.categories = categories.items;
-        this.totalRecords = categories.total;
+      .subscribe(
+        {next: (data: Categories) => {
+          this.categories = data.items;
+          this.totalRecords = data.total;
+        },
+        error: (error: any) => {
+          console.error('Error fetching categories', error);
+        },
+        }
+      );
+  };
+
+  editCategory = (category: Category, id: number) => {
+    this.categoryService
+      .editCategory(`http://localhost:3000/categories/${id}`, category)
+      .subscribe({
+        next: (data: Categories) => {
+          console.log('Category edited', data);
+          this.fetchCategories(0, this.rows);
+        },
+        error: (error: any) => {
+          console.error('Error editing category', error);
+        },
       });
   };
 
-  editCategory = (category: Category) => {
-    console.log('Edit category', category);
-  }
+  deleteCategory = (id: number) => {
+    this.categoryService
+      .deleteCategory(`http://localhost:3000/categories/${id}`)
+      .subscribe({
+        next: (data: Categories) => {
+          console.log('Category deleted', data);
+          this.fetchCategories(0, this.rows);
+        },
+        error: (error: any) => {
+          console.error('Error deleting category', error);
+        },
+      });
+  };
 
-  deleteCategory = (category: Category) => {
-    console.log('Delete category', category);
-  }
-
-  addCategory = (category:Category) => {
-    console.log('Add category');
-  }
+  addCategory = (category: Category) => {
+    this.categoryService
+      .addCategory('http://localhost:3000/categories', category)
+      .subscribe({
+        next: (data: Categories) => {
+          console.log('Category added', data);
+          this.fetchCategories(0, this.rows);
+        },
+        error: (error: any) => {
+          console.error('Error adding category', error);
+        },
+      });
+  };
 
   ngOnInit() {
     this.fetchCategories(0, this.rows);
