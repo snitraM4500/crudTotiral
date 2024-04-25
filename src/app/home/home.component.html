@@ -1,17 +1,33 @@
 <div class="bg-white py-24 sm:py-2">
   <div class="mx-auto max-w-7xl px-6 lg:px-8">
-    <div class="mx-auto max-w-2xl lg:mx-0">
+    <div class=" lg:mx-0 flex justify-between w-full">
       <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Lista de Categorias</h2>
+      <!-- Add category button -->
+
+      <button class="" type="button" pButton icon="pi pi-plus" (click)="toggleAddPopup()" fill="none"
+        viewBox="0 0 24 24" stroke="currentColor">
+        <span class="ml-2">Add Category</span>
+      </button>
     </div>
     <div
       class="mx-auto mt-10 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 border-t border-gray-200 pt-10 sm:mt-16 sm:pt-16 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-      <app-category *ngFor="let category of categories" [category]="category"></app-category>
+      <app-category *ngFor="let category of categories" [category]="category" (edit)="toggleEditPopup($event)"
+        (delete)="toggleDeletePopup($event)"></app-category>
 
 
 
 
     </div>
     <div class="mt-6 flex w-full justify-center"><p-paginator (onPageChange)="onPageChange($event)" [rows]="rows"
-        [totalRecords]="totalRecords" [rowsPerPageOptions]="[6, 12, 18]"></p-paginator></div>
+        [totalRecords]="totalRecords" [rowsPerPageOptions]="[6, 12, 18]"
+        (onPageChange)="onPageChange($event)"></p-paginator></div>
   </div>
 </div>
+
+<!-- Edit Category -->
+<app-edit-category-popup [category]="selectedCategory" [(display)]="displayEditPopup" (confirm)="onConfirmEdit($event)"
+  header="Edit Category"></app-edit-category-popup>
+
+<!-- Add Category -->
+<app-edit-category-popup [(display)]="displayAddPopup" (confirm)="onConfirmAdd($event)"
+  header="Add Category"></app-edit-category-popup>

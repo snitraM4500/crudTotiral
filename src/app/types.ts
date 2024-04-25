@@ -28,8 +28,9 @@ export interface Options {
 }
 
 export interface Product {
-  name:string,
-  description:string,
+  id?: number;
+  name: string;
+  description: string;
 }
 export interface Products {
   items: Product[];
@@ -40,8 +41,9 @@ export interface Products {
 }
 
 export interface Category {
-  name:string,
-  description:string,
+  id?: number;
+  name: string;
+  description: string;
 }
 export interface Categories {
   items: Category[];

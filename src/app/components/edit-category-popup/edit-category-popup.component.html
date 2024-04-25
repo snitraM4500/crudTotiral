@@ -1,0 +1,19 @@
+<p-dialog [header]="header" [(visible)]="display" [modal]="true" [closable]="false">
+  <div class="ui-g">
+    <div class="flex gap-4 p-4">
+      <label for="categoryName">Category Name</label>
+      <input id="categoryName" pInputText type="text" [(ngModel)]="category.name" />
+    </div>
+    <!-- Description Textarea -->
+    <div class=" flex p-4 gap-4">
+      <label for="description">Description</label>
+      <textarea id="description" pInputTextarea [(ngModel)]="category.description"></textarea>
+    </div>
+
+    <div class="flex gap-2">
+      <button pButton type="button" label="Confirm" (click)="onConfirm()"></button>
+      <button pButton type="button" label="Cancel" (click)="onCancel()"></button>
+    </div>
+  </div>
+
+</p-dialog>
