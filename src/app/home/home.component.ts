@@ -22,6 +22,7 @@ import { ButtonModule } from 'primeng/button';
 })
 export class HomeComponent {
   constructor(private categoryService: CategoryService) {}
+  categories: Category[] = [];
 
   displayEditPopup: boolean = false;
   displayAddPopup: boolean = false;
@@ -49,10 +50,9 @@ export class HomeComponent {
     description: '',
   };
 
-  categories: Category[] = [];
   onConfirmEdit(category: Category) {
-    if (!this.selectedCategory.id) {
-      this.onConfirmAdd(category);
+    if (this.selectedCategory.id===undefined) {
+      // this.onConfirmAdd(category);
       return;
     }
     this.editCategory(category, this.selectedCategory.id);
